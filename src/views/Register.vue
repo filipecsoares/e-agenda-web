@@ -6,61 +6,75 @@
       src="../assets/avatar-profile.png"
       class="profile-img"
     />
-    <form @submit.prevent="handleSubmit">
+    <v-form @submit="handleSubmit">
       <div class="form-group">
-        <label for="name">Nome completo</label>
-        <input
+        <label for="name">Nome</label>
+        <v-field
           id="name"
           type="text"
           class="form-control"
           name="name"
           v-model="state.user.name"
+          :rules="isRequired"
         />
+        <v-error-message name="name" class="alert alert-danger" role="alert" />
       </div>
       <div class="form-group">
         <label for="email">E-mail</label>
-        <input
+        <v-field
           id="email"
           type="email"
           class="form-control"
           name="email"
           v-model="state.user.email"
+          :rules="validateEmptyAndEmail"
         />
+        <v-error-message name="email" class="alert alert-danger" role="alert" />
       </div>
       <div class="form-group">
         <label for="phone">Telefone</label>
-        <input
+        <v-field
           id="phone"
           type="text"
           class="form-control"
           name="phone"
           v-model="state.user.phone"
         />
+        <v-error-message name="phone" />
       </div>
       <div class="form-group">
         <label for="password">Senha</label>
-        <input
+        <v-field
           id="password"
           type="password"
           class="form-control"
           name="password"
           v-model="state.user.password"
+          :rules="isRequired"
+        />
+        <v-error-message
+          name="password"
+          class="alert alert-danger"
+          role="alert"
         />
       </div>
       <div class="form-group">
-        <button class="btn btn-primary btn-block">
+        <button type="submit" class="btn btn-primary btn-block">
           <span>Cadastrar</span>
         </button>
       </div>
-    </form>
+    </v-form>
   </div>
 </template>
 
 <script>
 import { reactive } from 'vue';
+import * as V from 'vee-validate/dist/vee-validate';
+import { validateEmptyAndEmail, isRequired } from '../utils/validator';
 import User from '../models/User';
 
 export default {
+  components: { VForm: V.Form, VField: V.Field, VErrorMessage: V.ErrorMessage },
   setup() {
     const state = reactive({
       user: new User('', '', '', ''),
@@ -68,12 +82,14 @@ export default {
 
     function handleSubmit() {
       console.log('save');
-      console.log(state.user);
+      console.log(JSON.stringify(state.user));
     }
 
     return {
       state,
       handleSubmit,
+      isRequired,
+      validateEmptyAndEmail,
     };
   },
 };
@@ -82,6 +98,11 @@ export default {
 <style scoped>
 .form-group {
   text-align: left;
+}
+.alert {
+  margin-top: 3px;
+  padding: 1%;
+  display: block;
 }
 .profile-img {
   border-radius: 50%;

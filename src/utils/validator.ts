@@ -23,3 +23,11 @@ export function validateEmptyAndEmail(value: string) {
 
   return true;
 }
+
+export function isRequired(value: string) {
+  if (value && value.trim()) {
+    return true;
+  }
+
+  return '*Este campo é obrigatório';
+}
