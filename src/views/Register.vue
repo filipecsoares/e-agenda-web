@@ -6,7 +6,7 @@
       src="../assets/avatar-profile.png"
       class="profile-img"
     />
-    <form>
+    <form @submit.prevent="handleSubmit">
       <div class="form-group">
         <label for="name">Nome completo</label>
         <input
@@ -14,7 +14,7 @@
           type="text"
           class="form-control"
           name="name"
-          required
+          v-model="state.user.name"
         />
       </div>
       <div class="form-group">
@@ -24,12 +24,18 @@
           type="email"
           class="form-control"
           name="email"
-          required
+          v-model="state.user.email"
         />
       </div>
       <div class="form-group">
         <label for="phone">Telefone</label>
-        <input id="phone" type="text" class="form-control" name="phone" />
+        <input
+          id="phone"
+          type="text"
+          class="form-control"
+          name="phone"
+          v-model="state.user.phone"
+        />
       </div>
       <div class="form-group">
         <label for="password">Senha</label>
@@ -38,7 +44,7 @@
           type="password"
           class="form-control"
           name="password"
-          required
+          v-model="state.user.password"
         />
       </div>
       <div class="form-group">
@@ -51,7 +57,26 @@
 </template>
 
 <script>
-export default {};
+import { reactive } from 'vue';
+import User from '../models/User';
+
+export default {
+  setup() {
+    const state = reactive({
+      user: new User('', '', '', ''),
+    });
+
+    function handleSubmit() {
+      console.log('save');
+      console.log(state.user);
+    }
+
+    return {
+      state,
+      handleSubmit,
+    };
+  },
+};
 </script>
 
 <style scoped>
@@ -75,8 +100,8 @@ export default {};
 }
 @media screen and (max-width: 840px) {
   .card {
-    width: 80%;
-    padding: 1% 4%;
+    width: 77%;
+    padding: 1% 5%;
   }
 }
 @media screen and (max-width: 540px) {
