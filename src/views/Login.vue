@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <h1>Cadastre-se</h1>
+    <h1>Entrar no Sistema</h1>
     <img
       id="profile-img"
       src="../assets/avatar-profile.png"
@@ -8,39 +8,16 @@
     />
     <v-form @submit="handleSubmit">
       <div class="form-group">
-        <label for="name">Nome</label>
-        <v-field
-          id="name"
-          type="text"
-          class="form-control"
-          name="name"
-          v-model="state.user.name"
-          :rules="isRequired"
-        />
-        <v-error-message name="name" class="alert alert-danger" role="alert" />
-      </div>
-      <div class="form-group">
         <label for="email">E-mail</label>
         <v-field
           id="email"
           type="email"
           class="form-control"
           name="email"
-          v-model="state.user.email"
+          v-model="state.email"
           :rules="validateEmptyAndEmail"
         />
         <v-error-message name="email" class="alert alert-danger" role="alert" />
-      </div>
-      <div class="form-group">
-        <label for="phone">Telefone</label>
-        <v-field
-          id="phone"
-          type="text"
-          class="form-control"
-          name="phone"
-          v-model="state.user.phone"
-        />
-        <v-error-message name="phone" />
       </div>
       <div class="form-group">
         <label for="password">Senha</label>
@@ -49,7 +26,7 @@
           type="password"
           class="form-control"
           name="password"
-          v-model="state.user.password"
+          v-model="state.password"
           :rules="isRequired"
         />
         <v-error-message
@@ -60,7 +37,7 @@
       </div>
       <div class="form-group">
         <button type="submit" class="btn btn-primary btn-block">
-          <span>Cadastrar</span>
+          <span>Entrar</span>
         </button>
       </div>
     </v-form>
@@ -71,18 +48,18 @@
 import { reactive } from 'vue';
 import * as V from 'vee-validate/dist/vee-validate';
 import { validateEmptyAndEmail, isRequired } from '../utils/validator';
-import User from '../models/User';
 
 export default {
   components: { VForm: V.Form, VField: V.Field, VErrorMessage: V.ErrorMessage },
   setup() {
     const state = reactive({
-      user: new User('', '', '', ''),
+      email: '',
+      password: '',
     });
 
     function handleSubmit() {
-      console.log('save');
-      console.log(JSON.stringify(state.user));
+      console.log('entrar');
+      console.log(JSON.stringify(state));
     }
 
     return {
