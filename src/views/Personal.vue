@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <h1>Cadastre-se</h1>
+    <h1>Informações Pessoais</h1>
     <img
       id="profile-img"
       src="../assets/avatar-profile.png"
@@ -43,7 +43,7 @@
         <v-error-message name="phone" />
       </div>
       <div class="form-group">
-        <label for="password">Senha</label>
+        <label for="password">Nova Senha</label>
         <v-field
           id="password"
           type="password"
@@ -60,7 +60,7 @@
       </div>
       <div class="form-group">
         <button type="submit" class="btn btn-primary btn-block">
-          <span>Cadastrar</span>
+          <span>Alterar</span>
         </button>
       </div>
     </v-form>
@@ -68,7 +68,7 @@
 </template>
 
 <script lang="ts">
-import { reactive } from 'vue';
+import { reactive, onMounted } from 'vue';
 import * as V from 'vee-validate/dist/vee-validate';
 import { validateEmptyAndEmail, isRequired, validateEmptyAndMinLength } from '../utils/validator';
 import User from '../models/User';
@@ -80,8 +80,12 @@ export default {
       user: new User('', '', '', ''),
     });
 
+    onMounted(() => {
+      console.log('Carregar dados do usuário');
+    });
+
     function handleSubmit() {
-      console.log('save');
+      console.log('Alterar dados, se não tiver senha, manter a antiga');
       console.log(JSON.stringify(state.user));
     }
 

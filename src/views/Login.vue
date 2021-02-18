@@ -44,7 +44,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { reactive } from 'vue';
 import * as V from 'vee-validate/dist/vee-validate';
 import { validateEmptyAndEmail, isRequired } from '../utils/validator';

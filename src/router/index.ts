@@ -29,6 +29,14 @@ const routes: Array<RouteRecordRaw> = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "register" */ '../views/Register.vue'),
   },
+  {
+    path: '/personal',
+    name: 'Personal',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "personal" */ '../views/Personal.vue'),
+  },
 ];
 
 const router = createRouter({
