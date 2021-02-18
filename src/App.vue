@@ -1,12 +1,29 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
-    <router-link to="/register">Cadastrar</router-link> |
-    <router-link to="/login">Entrar</router-link> |
-    <router-link to="/personal">Dados Pessoais</router-link>
+    <nav class="navbar navbar-expand">
+      <div class="navbar-nav mr-auto">
+        <router-link to="/">
+          <font-awesome-icon icon="home" /> Home
+        </router-link>
+        <router-link to="/about">About</router-link>
+      </div>
+      <div class="navbar-nav ml-auto">
+        <router-link to="/personal">
+          <font-awesome-icon icon="user" /> Dados Pessoais
+        </router-link>
+        <router-link to="/register">
+          <font-awesome-icon icon="user" /> Cadastrar
+        </router-link>
+        <router-link to="/login">
+          <font-awesome-icon icon="sign-in-alt" /> Entrar
+        </router-link>
+        <router-link to="/logout">
+          <font-awesome-icon icon="sign-out-alt" /> Sair
+        </router-link>
+      </div>
+    </nav>
   </div>
-  <router-view/>
+  <router-view />
 </template>
 
 <style>
@@ -25,6 +42,8 @@
 #nav a {
   font-weight: bold;
   color: #2c3e50;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 #nav a.router-link-exact-active {
