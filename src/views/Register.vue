@@ -70,6 +70,7 @@
 <script lang="ts">
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
+import { useToast } from 'vue-toastification';
 import * as V from 'vee-validate/dist/vee-validate';
 import {
   validateEmptyAndEmail,
@@ -83,13 +84,16 @@ export default {
   components: { VForm: V.Form, VField: V.Field, VErrorMessage: V.ErrorMessage },
   setup() {
     const router = useRouter();
+    const toast = useToast();
     const state = reactive({
       user: new User('', '', '', ''),
     });
 
     function handleSubmit() {
+      toast.clear();
       register(state.user)
         .then((data: any) => {
+          toast.success('Usuário cadastrado com sucesso!');
           console.log(data);
           setTimeout(() => {
             router.push({ name: 'Login' });
