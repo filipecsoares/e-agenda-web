@@ -20,6 +20,17 @@
         <v-error-message name="name" class="alert alert-danger" role="alert" />
       </div>
       <div class="form-group">
+        <label for="phone">Telefone</label>
+        <v-field
+          id="phone"
+          type="text"
+          class="form-control"
+          name="phone"
+          v-model="state.user.phone"
+        />
+        <v-error-message name="phone" />
+      </div>
+      <div class="form-group">
         <label for="email">E-mail</label>
         <v-field
           id="email"
@@ -30,17 +41,6 @@
           :rules="validateEmptyAndEmail"
         />
         <v-error-message name="email" class="alert alert-danger" role="alert" />
-      </div>
-      <div class="form-group">
-        <label for="phone">Telefone</label>
-        <v-field
-          id="phone"
-          type="text"
-          class="form-control"
-          name="phone"
-          v-model="state.user.phone"
-        />
-        <v-error-message name="phone" />
       </div>
       <div class="form-group">
         <label for="password">Senha</label>
@@ -69,20 +69,35 @@
 
 <script lang="ts">
 import { reactive } from 'vue';
+import { useRouter } from 'vue-router';
 import * as V from 'vee-validate/dist/vee-validate';
-import { validateEmptyAndEmail, isRequired, validateEmptyAndMinLength } from '../utils/validator';
+import {
+  validateEmptyAndEmail,
+  isRequired,
+  validateEmptyAndMinLength,
+} from '../utils/validator';
 import User from '../models/User';
+import { register } from '../services/user.service';
 
 export default {
   components: { VForm: V.Form, VField: V.Field, VErrorMessage: V.ErrorMessage },
   setup() {
+    const router = useRouter();
     const state = reactive({
       user: new User('', '', '', ''),
     });
 
     function handleSubmit() {
-      console.log('save');
-      console.log(JSON.stringify(state.user));
+      register(state.user)
+        .then((data: any) => {
+          console.log(data);
+          setTimeout(() => {
+            router.push({ name: 'Login' });
+          }, 1000);
+        })
+        .catch((err: any) => {
+          console.error(err);
+        });
     }
 
     return {
