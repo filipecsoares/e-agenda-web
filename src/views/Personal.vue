@@ -70,12 +70,14 @@
 <script lang="ts">
 import { reactive, onMounted } from 'vue';
 import * as V from 'vee-validate/dist/vee-validate';
+import { useToast } from 'vue-toastification';
 import { validateEmptyAndEmail, isRequired, validateEmptyAndMinLength } from '../utils/validator';
 import User from '../models/User';
 
 export default {
   components: { VForm: V.Form, VField: V.Field, VErrorMessage: V.ErrorMessage },
   setup() {
+    const toast = useToast();
     const state = reactive({
       user: new User('', '', '', ''),
     });
@@ -85,6 +87,7 @@ export default {
     });
 
     function handleSubmit() {
+      toast.clear();
       console.log('Alterar dados, se não tiver senha, manter a antiga');
       console.log(JSON.stringify(state.user));
     }

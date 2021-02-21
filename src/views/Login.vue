@@ -47,19 +47,27 @@
 <script lang="ts">
 import { reactive } from 'vue';
 import * as V from 'vee-validate/dist/vee-validate';
+import { useRouter } from 'vue-router';
 import { validateEmptyAndEmail, isRequired } from '../utils/validator';
+import { login } from '../services/auth.service';
 
 export default {
   components: { VForm: V.Form, VField: V.Field, VErrorMessage: V.ErrorMessage },
   setup() {
+    const router = useRouter();
     const state = reactive({
       email: '',
       password: '',
     });
 
     function handleSubmit() {
-      console.log('entrar');
-      console.log(JSON.stringify(state));
+      login(state.email, state.password)
+        .then(() => {
+          router.push({ name: 'Home' });
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     }
 
     return {

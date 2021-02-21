@@ -8,16 +8,16 @@
         <router-link to="/about">About</router-link>
       </div>
       <div class="navbar-nav ml-auto">
-        <router-link to="/personal">
+        <router-link to="/personal" v-if="state.currentUser">
           <font-awesome-icon icon="user" /> Dados Pessoais
         </router-link>
-        <router-link to="/register">
+        <router-link to="/register" v-if="!state.currentUser">
           <font-awesome-icon icon="user" /> Cadastrar
         </router-link>
-        <router-link to="/login">
+        <router-link to="/login" v-if="!state.currentUser">
           <font-awesome-icon icon="sign-in-alt" /> Entrar
         </router-link>
-        <router-link to="/logout">
+        <router-link to="/logout" v-if="state.currentUser">
           <font-awesome-icon icon="sign-out-alt" /> Sair
         </router-link>
       </div>
@@ -25,6 +25,24 @@
   </div>
   <router-view />
 </template>
+
+<script lang="ts">
+import { reactive } from 'vue';
+import { getCurrentUser } from './services/auth.service';
+
+export default {
+  setup() {
+    const state = reactive({
+      currentUser: null,
+    });
+
+    getCurrentUser().subscribe((data) => {
+      state.currentUser = data;
+    });
+    return { state };
+  },
+};
+</script>
 
 <style>
 #app {
