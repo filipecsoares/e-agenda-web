@@ -1,3 +1,7 @@
+<template>
+  <div>Logout</div>
+</template>
+
 <script lang="ts">
 import { useRouter } from 'vue-router';
 import { logout } from '../services/auth.service';

@@ -1,7 +1,8 @@
 import api from '@/services/api';
 import { BehaviorSubject } from 'rxjs';
 
-const currentUserSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('currentUser') || '{}'));
+const currentUser = localStorage.getItem('currentUser') ? JSON.parse(localStorage.getItem('currentUser') || '{}') : null;
+const currentUserSubject = new BehaviorSubject(currentUser);
 const headers = { 'Content-Type': 'application/json; charset=UTF-8' };
 
 export function getCurrentUserValue() {
