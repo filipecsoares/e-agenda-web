@@ -7,8 +7,12 @@ export function register(user: User): Promise<any> {
   return api.post('users', JSON.stringify(user), { headers });
 }
 
-export function getUserById(): Promise<any> {
-  return api.get('users');
+export function update(user: User): Promise<any> {
+  return api.put('users', JSON.stringify(user), { headers });
+}
+
+export function getUserById(userId: number): Promise<any> {
+  return api.get(`users/${userId}`);
 }
 
 export function getAll(): Promise<any> {

@@ -50,7 +50,7 @@
           class="form-control"
           name="password"
           v-model="state.user.password"
-          :rules="validateEmptyAndMinLength"
+          :rules="validateMinLengthPassword"
         />
         <v-error-message
           name="password"
@@ -71,19 +71,35 @@
 import { reactive, onMounted } from 'vue';
 import * as V from 'vee-validate/dist/vee-validate';
 import { useToast } from 'vue-toastification';
-import { validateEmptyAndEmail, isRequired, validateEmptyAndMinLength } from '../utils/validator';
+import { useRouter } from 'vue-router';
+import {
+  validateEmptyAndEmail,
+  isRequired,
+  validateMinLengthPassword,
+} from '../utils/validator';
 import User from '../models/User';
+import { update, getUserById } from '../services/user.service';
+import { getCurrentUserValue } from '../services/auth.service';
 
 export default {
   components: { VForm: V.Form, VField: V.Field, VErrorMessage: V.ErrorMessage },
   setup() {
+    const router = useRouter();
     const toast = useToast();
     const state = reactive({
       user: new User('', '', '', ''),
     });
 
-    onMounted(() => {
-      console.log('Carregar dados do usuário');
+    if (!getCurrentUserValue()) {
+      router.push({ name: 'Login' });
+    }
+    const { userId } = getCurrentUserValue();
+    getUserById(userId).then((response) => {
+      const { name, email, phone } = response.data;
+      state.user = new User(name, email, phone, null);
+      console.log(response.data);
+    }).catch((error) => {
+      console.error(error);
     });
 
     function handleSubmit() {
@@ -97,7 +113,7 @@ export default {
       handleSubmit,
       isRequired,
       validateEmptyAndEmail,
-      validateEmptyAndMinLength,
+      validateMinLengthPassword,
     };
   },
 };

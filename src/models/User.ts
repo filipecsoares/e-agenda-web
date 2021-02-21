@@ -5,9 +5,9 @@ export default class User {
 
     phone: string;
 
-    password: string;
+    password: string | null;
 
-    constructor(name: string, email: string, phone: string, password: string) {
+    constructor(name: string, email: string, phone: string, password: string | null) {
       this.name = name;
       this.email = email;
       this.phone = phone;

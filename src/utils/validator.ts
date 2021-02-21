@@ -10,6 +10,14 @@ export function validateEmptyAndMinLength(value: string) {
   return true;
 }
 
+export function validateMinLengthPassword(value: string) {
+  if (value && value.length < 4) {
+    return '*Este campo precisa de no mínimo 4 caracteres.';
+  }
+
+  return true;
+}
+
 export function validateEmptyAndEmail(value: string) {
   if (!value) {
     return '*Este campo é obrigatório';
