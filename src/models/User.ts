@@ -1,16 +1,25 @@
 export default class User {
-    name: string;
+  id: number | null;
 
-    email: string;
+  name: string;
 
-    phone: string;
+  email: string;
 
-    password: string | null;
+  phone: string;
 
-    constructor(name: string, email: string, phone: string, password: string | null) {
-      this.name = name;
-      this.email = email;
-      this.phone = phone;
-      this.password = password;
-    }
+  password: string | null;
+
+  constructor(
+    id: number | null,
+    name: string,
+    email: string,
+    phone: string,
+    password: string | null,
+  ) {
+    this.id = id;
+    this.name = name;
+    this.email = email;
+    this.phone = phone;
+    this.password = password;
+  }
 }

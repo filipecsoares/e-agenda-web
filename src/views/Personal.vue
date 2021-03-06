@@ -87,7 +87,7 @@ export default {
     const router = useRouter();
     const toast = useToast();
     const state = reactive({
-      user: new User('', '', '', ''),
+      user: new User(null, '', '', '', ''),
     });
 
     if (!getCurrentUserValue()) {
@@ -96,16 +96,18 @@ export default {
     const { userId } = getCurrentUserValue();
     getUserById(userId).then((response) => {
       const { name, email, phone } = response.data;
-      state.user = new User(name, email, phone, null);
-      console.log(response.data);
+      state.user = new User(userId, name, email, phone, null);
     }).catch((error) => {
       console.error(error);
     });
 
     function handleSubmit() {
       toast.clear();
-      console.log('Alterar dados, se não tiver senha, manter a antiga');
-      console.log(JSON.stringify(state.user));
+      update(state.user).then((response) => {
+        toast.success('Informações alteradas com sucesso!');
+      }).catch((error) => {
+        console.error(error);
+      });
     }
 
     return {

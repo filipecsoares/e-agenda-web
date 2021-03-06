@@ -1,5 +1,6 @@
 import User from '@/models/User';
 import api from '@/services/api';
+import { getCurrentUserValue } from './auth.service';
 
 const headers = { 'Content-Type': 'application/json; charset=UTF-8' };
 
@@ -8,7 +9,10 @@ export function register(user: User): Promise<any> {
 }
 
 export function update(user: User): Promise<any> {
-  return api.put('users', JSON.stringify(user), { headers });
+  const { type, token } = getCurrentUserValue();
+  const Authorization = `${type} ${token}`;
+  const newHeaders = { ...headers, Authorization };
+  return api.put(`users/${user.id}`, JSON.stringify(user), { headers: newHeaders });
 }
 
 export function getUserById(userId: number): Promise<any> {

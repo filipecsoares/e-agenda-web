@@ -86,7 +86,7 @@ export default {
     const router = useRouter();
     const toast = useToast();
     const state = reactive({
-      user: new User('', '', '', ''),
+      user: new User(null, '', '', '', ''),
     });
 
     function handleSubmit() {
@@ -94,7 +94,6 @@ export default {
       register(state.user)
         .then((data: any) => {
           toast.success('Usuário cadastrado com sucesso!');
-          console.log(data);
           setTimeout(() => {
             router.push({ name: 'Login' });
           }, 1000);
