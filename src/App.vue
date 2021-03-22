@@ -8,6 +8,9 @@
         <router-link to="/about">About</router-link>
       </div>
       <div class="navbar-nav ml-auto">
+        <router-link to="/newAgenda" v-if="state.currentUser">
+          <font-awesome-icon icon="user" /> Minha Agenda
+        </router-link>
         <router-link to="/personal" v-if="state.currentUser">
           <font-awesome-icon icon="user" /> Dados Pessoais
         </router-link>

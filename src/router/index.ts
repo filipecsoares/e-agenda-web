@@ -15,6 +15,11 @@ const routes: Array<RouteRecordRaw> = [
     component: Login,
   },
   {
+    path: '/newAgenda',
+    name: 'NewAgenda',
+    component: () => import(/* webpackChunkName: "about" */ '../views/agenda/NewAgenda.vue'),
+  },
+  {
     path: '/about',
     name: 'About',
     // route level code-splitting
