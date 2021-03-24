@@ -42,7 +42,8 @@
         <label for="serviceTime">Tempo de atendimento</label>
         <v-field
           id="serviceTime"
-          type="number"
+          type="text"
+          placeholder="hh:mm"
           class="form-control"
           name="serviceTime"
           v-model="state.agenda.serviceTime"

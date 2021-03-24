@@ -1,4 +1,5 @@
 import Agenda from '@/models/Agenda';
+import User from '@/models/User';
 import api from '@/services/api';
 import { getCurrentUserValue } from './auth.service';
 
@@ -9,7 +10,7 @@ export function register(agenda: Agenda): Promise<any> {
   const Authorization = `${type} ${token}`;
   const newHeaders = { ...headers, Authorization };
   const newAgenda = { ...agenda };
-  newAgenda.userId = userId;
+  newAgenda.user = new User(userId, '', '', '', '');
   return api.post('agendas', JSON.stringify(newAgenda), { headers: newHeaders });
 }
 

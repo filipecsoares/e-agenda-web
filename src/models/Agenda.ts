@@ -1,9 +1,11 @@
+import User from './User';
+
 export default class Agenda {
   id: number | null;
 
   name: string;
 
-  userId: number | null;
+  user: User | null;
 
   fromHour: string;
 
@@ -20,7 +22,7 @@ export default class Agenda {
   constructor(
     id: number | null,
     name: string,
-    userId: number | null,
+    user: User | null,
     fromHour: string,
     toHour: string,
     serviceTime: string,
@@ -30,7 +32,7 @@ export default class Agenda {
   ) {
     this.id = id;
     this.name = name;
-    this.userId = userId;
+    this.user = user;
     this.fromHour = fromHour;
     this.toHour = toHour;
     this.serviceTime = serviceTime;
