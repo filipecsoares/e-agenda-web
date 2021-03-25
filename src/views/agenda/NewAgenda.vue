@@ -74,16 +74,37 @@
         <v-error-message name="lunchBreakTo" class="alert alert-danger" role="alert" />
       </div>
       <div class="form-group">
-        <label for="daysOfWeek">Dias de trabalho</label>
-        <v-field
-          id="daysOfWeek"
-          type="text"
-          class="form-control"
-          name="daysOfWeek"
-          v-model="state.agenda.daysOfWeek"
-          :rules="isRequired"
-        />
-        <v-error-message name="daysOfWeek" class="alert alert-danger" role="alert" />
+        <label for="days-of-week">Dias de atendimento</label>
+        <div class="days-of-week" id="days-of-week">
+          <div>
+            <input type="checkbox" id="monday" value="2" v-model="state.checkedDays">&nbsp;
+            <label for="monday">Segunda-Feira</label>
+          </div>
+          <div>
+            <input type="checkbox" id="tuesday" value="3" v-model="state.checkedDays">&nbsp;
+            <label for="tuesday">Terça-Feira</label>
+          </div>
+          <div>
+            <input type="checkbox" id="wednesday" value="4" v-model="state.checkedDays">&nbsp;
+            <label for="wednesday">Quarta-Feira</label>
+          </div>
+          <div>
+            <input type="checkbox" id="thursday" value="5" v-model="state.checkedDays">&nbsp;
+            <label for="thursday">Quinta-Feira</label>
+          </div>
+          <div>
+            <input type="checkbox" id="friday" value="6" v-model="state.checkedDays">&nbsp;
+            <label for="friday">Sexta-Feira</label>
+          </div>
+          <div>
+            <input type="checkbox" id="saturday" value="7" v-model="state.checkedDays">&nbsp;
+            <label for="saturday">Sábado</label>
+          </div>
+          <div>
+            <input type="checkbox" id="sunday" value="1" v-model="state.checkedDays">&nbsp;
+            <label for="sunday">Domingo</label>
+          </div>
+        </div>
       </div>
       <div class="form-group">
         <button type="submit" class="btn btn-primary btn-block">
@@ -114,9 +135,11 @@ export default {
     const toast = useToast();
     const state = reactive({
       agenda: new Agenda(null, '', null, '', '', '', '', '', ''),
+      checkedDays: [],
     });
 
     function handleSubmit() {
+      state.agenda.daysOfWeek = state.checkedDays.join(',');
       toast.clear();
       register(state.agenda)
         .then((data: any) => {
@@ -127,6 +150,7 @@ export default {
         })
         .catch((err: any) => {
           console.error(err);
+          toast.error(err.message);
         });
     }
 
@@ -168,5 +192,9 @@ export default {
     width: 90%;
     padding: 1% 2%;
   }
+}
+.days-of-week {
+  display: flex;
+  flex-direction: column;
 }
 </style>
