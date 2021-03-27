@@ -134,8 +134,8 @@ export default {
     const router = useRouter();
     const toast = useToast();
     const state = reactive({
-      agenda: new Agenda(null, '', null, '', '', '', '', '', ''),
-      checkedDays: [],
+      agenda: new Agenda(null, '', null, '', '', '01:00', '', '', ''),
+      checkedDays: [2, 3, 4, 5, 6],
     });
 
     function handleSubmit() {
