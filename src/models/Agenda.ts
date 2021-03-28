@@ -19,6 +19,8 @@ export default class Agenda {
 
   daysOfWeek: string;
 
+  address: string;
+
   constructor(
     id: number | null,
     name: string,
@@ -29,6 +31,7 @@ export default class Agenda {
     lunchBreakFrom: string | null,
     lunchBreakTo: string | null,
     daysOfWeek: string,
+    address: string,
   ) {
     this.id = id;
     this.name = name;
@@ -39,5 +42,6 @@ export default class Agenda {
     this.lunchBreakFrom = lunchBreakFrom;
     this.lunchBreakTo = lunchBreakTo;
     this.daysOfWeek = daysOfWeek;
+    this.address = address;
   }
 }

@@ -15,6 +15,18 @@
         <v-error-message name="name" class="alert alert-danger" role="alert" />
       </div>
       <div class="form-group">
+        <label for="address">Endereço</label>
+        <v-field
+          id="address"
+          type="text"
+          class="form-control"
+          name="address"
+          v-model="state.agenda.address"
+          :rules="isRequired"
+        />
+        <v-error-message name="address" class="alert alert-danger" role="alert" />
+      </div>
+      <div class="form-group">
         <label for="fromHour">Horário inicial do atendimento</label>
         <v-field
           id="fromHour"
@@ -134,7 +146,7 @@ export default {
     const router = useRouter();
     const toast = useToast();
     const state = reactive({
-      agenda: new Agenda(null, '', null, '', '', '01:00', '', '', ''),
+      agenda: new Agenda(null, '', null, '', '', '01:00', '', '', '', ''),
       checkedDays: [2, 3, 4, 5, 6],
     });
 
