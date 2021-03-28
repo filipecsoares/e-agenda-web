@@ -2,9 +2,9 @@
   <div class="home">
     <div class="container-fluid grid">
       <div class="row justify-content-between">
-        <div class="col-3 align-self-center first-col">
+        <div class="col-4 align-self-center first-col">
           <div class="my-agenda">
-            <h4>Minha agenda</h4>
+            <h2>Minha agenda</h2>
             <img src="../assets/calendar.png" width="50" height="50"/>
           </div>
         </div>
@@ -19,8 +19,8 @@
           <div class="card">
             <div class="card-body card-agendas">
               <div>
-                <h5 class="card-title">Beleza única Salão de Beleza</h5>
-                <p class="card-text">Endereço: hhhhhhhh n:8665 Bairro: kkkkk</p>
+                <h5 class="card-title">Unhas Lindas Manicure - Joana Santos</h5>
+                <p class="card-text">Endereço: Rua Roberto Vianna N:776 Bairro: Londrina</p>
               </div>
               <img src="../assets/calendar.png" width="50" height="50"/>
             </div>
@@ -28,8 +28,8 @@
           <div class="card">
             <div class="card-body card-agendas">
               <div>
-                <h5 class="card-title">Beleza única Salão de Beleza</h5>
-                <p class="card-text">Endereço: hhhhhhhh n:8665 Bairro: kkkkk</p>
+                <h5 class="card-title">Beleza única Salão de Beleza - Zelita Cunha</h5>
+                <p class="card-text">Endereço: Rua Jendira da Silva N:8665 Bairro: Bela Vista</p>
               </div>
               <img src="../assets/calendar.png" width="50" height="50"/>
             </div>
@@ -37,8 +37,8 @@
           <div class="card">
             <div class="card-body card-agendas">
               <div>
-                <h5 class="card-title">Beleza única Salão de Beleza</h5>
-                <p class="card-text">Endereço: hhhhhhhh n:8665 Bairro: kkkkk</p>
+                <h5 class="card-title">Bike Oficina de Bicicleta - Breno Mendez</h5>
+                <p class="card-text">Endereço: Rua Valdirene Vicente n:668 Bairro: Pedra Branca</p>
               </div>
               <img src="../assets/calendar.png" width="50" height="50"/>
             </div>
@@ -50,13 +50,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { useRouter } from 'vue-router';
+import { getCurrentUserValue } from '../services/auth.service';
 
-export default defineComponent({
-  name: 'Home',
-  components: {
+export default {
+  setup() {
+    const router = useRouter();
+
+    if (!getCurrentUserValue()) {
+      router.push({ name: 'EAgenda' });
+    }
+    return {};
   },
-});
+};
 </script>
 <style scoped>
  .grid{
@@ -64,20 +70,19 @@ export default defineComponent({
    width: 90vw;
  }
  .first-col{
-   padding: 4%;
-   height: 40vh;
+   padding: 1%;
+   height: 35vh;
  }
  .sec-col{
-
-   height: 80vh;
+    height: 80vh;
     background-color: #eee;
     box-shadow: 1px 1px 8px 1px rgba(0,0,0, 0.2);
     border-radius: 5px;
     padding: 5%;
  }
  .my-agenda{
-   width: 100%;
-   height: 100%;
+   width: 75%;
+   height: 90%;
    background-color: #eee;
    border-radius: 5px;
    box-shadow: 1px 1px 8px 1px rgba(0,0,0, 0.2);
@@ -86,6 +91,7 @@ export default defineComponent({
    align-items: center;
    justify-content: center;
    font-weight: bold;
+   margin-left: 10%;
  }
   .card-agendas{
     display: flex;

@@ -1,13 +1,17 @@
 <template>
   <div id="nav">
     <nav class="navbar navbar-expand">
-      <div class="navbar-nav mr-auto">
+      <div class="logo-container">
+        <font-awesome-icon icon="calendar-check" size="2x"/>
+        <router-link to="/"><h2>e-agenda</h2></router-link>
+      </div>
+      <div class="navbar-nav ml-auto">
         <router-link to="/">
           <font-awesome-icon icon="home" /> Home
         </router-link>
-        <router-link to="/about">About</router-link>
-      </div>
-      <div class="navbar-nav ml-auto">
+        <router-link to="/about">
+          <font-awesome-icon icon="question" /> Sobre
+        </router-link>
         <router-link to="/newAgenda" v-if="state.currentUser">
           <font-awesome-icon icon="calendar" /> Minha Agenda
         </router-link>
@@ -57,17 +61,33 @@ export default {
 }
 
 #nav {
-  padding: 30px;
+  padding-right: 60px;
+  padding-left: 50px;
+  padding-top: 15px;
+  padding-bottom: 5px;
+  box-shadow: 1px 1px 8px 1px rgba(0,0,0, 0.2);
+  margin-bottom: 1.5%;
 }
 
 #nav a {
   font-weight: bold;
   color: #2c3e50;
-  margin-left: 5px;
-  margin-right: 5px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+h2{
+  font-family: 'Baloo Paaji 2', cursive;
+  color: #42b983;
+}
+.logo-container {
+  display: flex;
+  width: 11vw;
+  justify-content: space-evenly;
+  margin: 0%;
 }
 </style>
