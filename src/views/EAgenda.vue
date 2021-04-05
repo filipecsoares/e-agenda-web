@@ -1,11 +1,11 @@
 <template>
- <div class="eagenda-container">
-   <div class="grid-row">
+ <div class="container-fluid">
+   <div class="grid-row flex-column-center">
      <h1>Conectando pessoas e estabelecimentos de serviços</h1>
-     <h2>Agende seu horário ou disponibilize seu horário</h2>
-     <img src="../assets/calendar.png" width="250" height="250"/>
+     <h2>Disponibilize e/ou agende seu horário</h2>
+     <img src="../assets/calendar.png" width="230" height="230"/>
    </div>
-   <div class="button-align">
+   <div class="button-align flex-column-center">
      <button class="btn btn-light my-button" @click="goToLoginPage">Entrar</button>
      <button class="btn btn-light my-button" @click="goToRegisterPage">Cadastrar</button>
    </div>
@@ -32,32 +32,32 @@ export default {
   },
 };
 </script>
-<style>
-.eagenda-container{
-  width: 100vw;
+<style scoped>
+.container-fluid{
   height: 90vh;
-  background-image:  url("../assets/background.jpg");
+  background-image: url("../assets/background.jpg");
   background-size: cover;
   display: flex;
   font-family: 'Baloo Paaji 2', cursive;
   margin-top: -1.5%;
 }
 .grid-row{
-  display: flex;
-  flex-direction: column;
-  max-width: 50%;
+  max-width: 60%;
   padding: 5%;
-  justify-content: space-evenly;
   text-align: center;
-  align-items: center;
+}
+.grid-row h1{
+  font-size: 3rem;
 }
 .button-align{
+  height: 50%;
+  width: 35%;
+  align-self: center;
+}
+.flex-column-center{
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  height: 50%;
-  width: 50%;
-  align-self: center;
   align-items: center;
 }
 .my-button{
@@ -75,5 +75,42 @@ export default {
 }
 button:hover{
   filter: brightness(0.9);
+}
+@media only screen and (max-width:820px){
+  .container-fluid{
+    flex-direction: column;
+    width: 100%;
+  }
+  .grid-row{
+    max-width: 100vw;
+    align-self: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .button-align{
+    height: unset;
+    display: flex;
+    flex-direction: row;
+  }
+  .my-button{
+    min-width: 20vw;
+    min-height: 8vh;
+    font-size: 1.5rem !important;
+    margin: 0 2%;
+  }
+
+ @media only screen and (max-width:600px) {
+   .grid-row h1,h2{
+     font-size: 1.6rem !important;
+   }
+   img{
+     width: 150px;
+     height: 150px;
+   }
+   .my-button{
+     font-size: 1.2rem !important;
+     min-width: 30vw;
+   }
+ }
 }
 </style>

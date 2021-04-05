@@ -52,21 +52,14 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
 #nav {
-  padding-right: 60px;
+  padding-right: 50px;
   padding-left: 50px;
   padding-top: 15px;
   padding-bottom: 5px;
   box-shadow: 1px 1px 8px 1px rgba(0,0,0, 0.2);
   margin-bottom: 1.5%;
+  min-width: 780px;
 }
 
 #nav a {
@@ -86,8 +79,31 @@ h2{
 }
 .logo-container {
   display: flex;
-  width: 11vw;
+  min-width: 15%;
   justify-content: space-evenly;
   margin: 0%;
+}
+
+@media only screen and (max-width:600px) {
+  #nav{
+    font-size: 1.1rem;
+    max-width: 100vw;
+    min-width: unset;
+    padding: 3%;
+  }
+  #nav a{
+    min-width: min-content;
+  }
+ .navbar{
+    display: block !important;
+    padding: 0 !important;
+  }
+  .navbar-nav{
+    justify-content: space-between;
+  }
+ .logo-container{
+    justify-content: center;
+    font-size: 1rem;
+ }
 }
 </style>

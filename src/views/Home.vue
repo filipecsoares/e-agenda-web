@@ -3,7 +3,7 @@
     <div class="container-fluid grid">
       <div class="row justify-content-between">
         <div class="col-4 align-self-center first-col">
-          <div class="my-agenda">
+          <div class="my-agenda" @click="goToMyAgenda">
             <h2>Minha agenda</h2>
             <img src="../assets/calendar.png" width="50" height="50"/>
           </div>
@@ -29,7 +29,7 @@
             <div class="card-body card-agendas">
               <div>
                 <h5 class="card-title">Beleza única Salão de Beleza - Zelita Cunha</h5>
-                <p class="card-text">Endereço: Rua Jendira da Silva N:8665 Bairro: Bela Vista</p>
+                <p class="card-text">Endereço: Rua Jandira da Silva N:8665 Bairro: Bela Vista</p>
               </div>
               <img src="../assets/calendar.png" width="50" height="50"/>
             </div>
@@ -60,7 +60,11 @@ export default {
     if (!getCurrentUserValue()) {
       router.push({ name: 'EAgenda' });
     }
-    return {};
+
+    function goToMyAgenda() {
+      router.push({ name: 'NewAgenda' });
+    }
+    return { goToMyAgenda };
   },
 };
 </script>
@@ -92,6 +96,7 @@ export default {
    justify-content: center;
    font-weight: bold;
    margin-left: 10%;
+   cursor: pointer;
  }
   .card-agendas{
     display: flex;
