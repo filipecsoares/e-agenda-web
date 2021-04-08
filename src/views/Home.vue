@@ -62,7 +62,7 @@ export default {
     }
 
     function goToMyAgenda() {
-      router.push({ name: 'NewAgenda' });
+      router.push({ name: 'MyAgenda' });
     }
     return { goToMyAgenda };
   },

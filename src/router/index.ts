@@ -21,9 +21,9 @@ const routes: Array<RouteRecordRaw> = [
     component: EAgenda,
   },
   {
-    path: '/newAgenda',
-    name: 'NewAgenda',
-    component: () => import(/* webpackChunkName: "about" */ '../views/agenda/NewAgenda.vue'),
+    path: '/myAgenda',
+    name: 'MyAgenda',
+    component: () => import(/* webpackChunkName: "about" */ '../views/agenda/MyAgenda.vue'),
   },
   {
     path: '/about',

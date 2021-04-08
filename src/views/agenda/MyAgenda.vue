@@ -132,13 +132,14 @@ import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { useToast } from 'vue-toastification';
 import * as V from 'vee-validate/dist/vee-validate';
+import { getCurrentUserValue } from '@/services/auth.service';
 import {
   validateEmptyAndEmail,
   isRequired,
   validateEmptyAndMinLength,
 } from '../../utils/validator';
 import Agenda from '../../models/Agenda';
-import { register } from '../../services/agenda.service';
+import { getAgendaByUserId, register } from '../../services/agenda.service';
 
 export default {
   components: { VForm: V.Form, VField: V.Field, VErrorMessage: V.ErrorMessage },
@@ -148,6 +149,20 @@ export default {
     const state = reactive({
       agenda: new Agenda(null, '', null, '', '', '01:00', '', '', '', ''),
       checkedDays: [2, 3, 4, 5, 6],
+    });
+
+    const { userId } = getCurrentUserValue();
+    getAgendaByUserId(userId).then((response) => {
+      const {
+        id, name, fromHour, toHour, serviceTime, lunchBreakFrom, lunchBreakTo, daysOfWeek, address,
+      } = response.data;
+      state.checkedDays = daysOfWeek.split(',').map((item: string) => parseInt(item, 10));
+      state.agenda = new Agenda(
+        id, name, null, fromHour, toHour,
+        serviceTime, lunchBreakFrom, lunchBreakTo, daysOfWeek, address,
+      );
+    }).catch((error) => {
+      console.error(error);
     });
 
     function handleSubmit() {

@@ -12,7 +12,7 @@
         <router-link to="/about">
           <font-awesome-icon icon="question" /> Sobre
         </router-link>
-        <router-link to="/newAgenda" v-if="state.currentUser">
+        <router-link to="/myAgenda" v-if="state.currentUser">
           <font-awesome-icon icon="calendar" /> Minha Agenda
         </router-link>
         <router-link to="/personal" v-if="state.currentUser">
