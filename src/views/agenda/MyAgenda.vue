@@ -120,7 +120,8 @@
       </div>
       <div class="form-group">
         <button type="submit" class="btn btn-primary btn-block">
-          <span>Cadastrar</span>
+          <span v-if="!state.agenda.id">Cadastrar</span>
+          <span v-else>Atualizar</span>
         </button>
       </div>
     </v-form>
@@ -170,7 +171,11 @@ export default {
       toast.clear();
       register(state.agenda)
         .then((data: any) => {
-          toast.success('Agenda cadastrada com sucesso!');
+          if (!state.agenda.id) {
+            toast.success('Agenda cadastrada com sucesso!');
+          } else {
+            toast.success('Agenda atualizada com sucesso!');
+          }
           setTimeout(() => {
             router.push({ name: 'Home' });
           }, 1000);
