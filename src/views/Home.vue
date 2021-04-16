@@ -16,29 +16,11 @@
               <font-awesome-icon icon="search" />
             </button>
           </div>
-          <div class="card">
+          <div class="card" v-for="agenda in state.agendas" :key="agenda.id">
             <div class="card-body card-agendas">
-              <div>
-                <h5 class="card-title">Unhas Lindas Manicure - Joana Santos</h5>
-                <p class="card-text">Endereço: Rua Roberto Vianna N:776 Bairro: Londrina</p>
-              </div>
-              <img src="../assets/calendar.png" width="50" height="50"/>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-body card-agendas">
-              <div>
-                <h5 class="card-title">Beleza única Salão de Beleza - Zelita Cunha</h5>
-                <p class="card-text">Endereço: Rua Jandira da Silva N:8665 Bairro: Bela Vista</p>
-              </div>
-              <img src="../assets/calendar.png" width="50" height="50"/>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-body card-agendas">
-              <div>
-                <h5 class="card-title">Bike Oficina de Bicicleta - Breno Mendez</h5>
-                <p class="card-text">Endereço: Rua Valdirene Vicente n:668 Bairro: Pedra Branca</p>
+              <div class="w-75">
+                <h5 class="card-title">{{agenda.name}}</h5>
+                <p class="card-text">{{agenda.address}}</p>
               </div>
               <img src="../assets/calendar.png" width="50" height="50"/>
             </div>
@@ -50,8 +32,10 @@
 </template>
 
 <script lang="ts">
+import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { getCurrentUserValue } from '../services/auth.service';
+import { getAll } from '../services/agenda.service';
 
 export default {
   setup() {
@@ -61,10 +45,19 @@ export default {
       router.push({ name: 'EAgenda' });
     }
 
+    const state = reactive({
+      agendas: [],
+    });
+
+    getAll().then((response) => {
+      console.log(response.data);
+      state.agendas = response.data;
+    }).catch();
+
     function goToMyAgenda() {
       router.push({ name: 'MyAgenda' });
     }
-    return { goToMyAgenda };
+    return { state, goToMyAgenda };
   },
 };
 </script>

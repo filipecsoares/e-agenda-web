@@ -33,7 +33,9 @@ export function register(agenda: Agenda): Promise<any> {
 }
 
 export function getAll(): Promise<any> {
-  return api.get('agendas');
+  const Authorization = getAuthorization();
+  const newHeaders = { ...headers, Authorization };
+  return api.get('agendas', { headers: newHeaders });
 }
 
 export function getAgendaByUserId(userId: number): Promise<any> {
