@@ -17,7 +17,7 @@
             </button>
           </div>
           <div class="card" v-for="agenda in state.agendas" :key="agenda.id">
-            <div class="card-body card-agendas">
+            <div class="card-body card-agendas" @click="openAgenda(agenda.id)">
               <div class="w-75">
                 <h5 class="card-title">{{agenda.name}}</h5>
                 <p class="card-text">{{agenda.address}}</p>
@@ -50,14 +50,19 @@ export default {
     });
 
     getAll().then((response) => {
-      console.log(response.data);
       state.agendas = response.data;
-    }).catch();
+    }).catch((err) => {
+      console.error(err);
+    });
 
     function goToMyAgenda() {
       router.push({ name: 'MyAgenda' });
     }
-    return { state, goToMyAgenda };
+
+    function openAgenda(agendaId: number) {
+      console.log(agendaId);
+    }
+    return { state, goToMyAgenda, openAgenda };
   },
 };
 </script>
@@ -96,6 +101,7 @@ export default {
     flex-direction: row;
     justify-content: space-around;
     padding: 0.6rem;
+    cursor: pointer;
  }
  .card{
    margin-top: 1.5%;

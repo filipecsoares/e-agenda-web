@@ -3,6 +3,7 @@ import Home from '../views/Home.vue';
 import Login from '../views/Login.vue';
 import Logout from '../views/Logout.vue';
 import EAgenda from '../views/EAgenda.vue';
+import AgendaView from '../views/agenda/AgendaView.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -53,6 +54,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/logout',
     name: 'Logout',
     component: Logout,
+  },
+  {
+    path: '/agendaView',
+    name: 'AgendaView',
+    component: AgendaView,
   },
 ];
 
