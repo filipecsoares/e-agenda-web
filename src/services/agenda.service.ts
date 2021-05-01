@@ -43,3 +43,9 @@ export function getAgendaByUserId(userId: number): Promise<any> {
   const newHeaders = { ...headers, Authorization };
   return api.get(`agendas/user/${userId}`, { headers: newHeaders });
 }
+
+export function getAgendaById(agendaId: number): Promise<any> {
+  const Authorization = getAuthorization();
+  const newHeaders = { ...headers, Authorization };
+  return api.get(`agendas/${agendaId}`, { headers: newHeaders });
+}

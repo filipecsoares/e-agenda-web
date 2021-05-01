@@ -35,7 +35,7 @@
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { getCurrentUserValue } from '../services/auth.service';
-import { getAll } from '../services/agenda.service';
+import { getAll, getAgendaById } from '../services/agenda.service';
 
 export default {
   setup() {
@@ -61,6 +61,12 @@ export default {
 
     function openAgenda(agendaId: number) {
       console.log(agendaId);
+      getAgendaById(agendaId).then((response) => {
+        console.log(response.data);
+        router.push({ name: 'AgendaView', params: response.data });
+      }).catch((err) => {
+        console.error(err);
+      });
     }
     return { state, goToMyAgenda, openAgenda };
   },
