@@ -24,3 +24,9 @@ export function getAllByAgendaId(agendaId: number): Promise<any> {
   const newHeaders = { ...headers, Authorization };
   return api.get(`appointments/${agendaId}`, { headers: newHeaders });
 }
+
+export function cancelAppointment(appointmentId: number): Promise<any> {
+  const Authorization = getAuthorization();
+  const newHeaders = { ...headers, Authorization };
+  return api.delete(`appointments/cancel/${appointmentId}`, { headers: newHeaders });
+}

@@ -8,7 +8,7 @@ export default class Appointment {
 
   user: User | null;
 
-  status: string;
+  status: string | null;
 
   dtWhen: Date;
 
@@ -18,7 +18,7 @@ export default class Appointment {
     id: number | null,
     agenda: Agenda | null,
     user: User | null,
-    status: string,
+    status: string | null,
     dtWhen: Date,
     description: string,
   ) {
