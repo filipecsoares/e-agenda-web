@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <h1>Cadastrar Agenda</h1>
+    <h1>{{state.title}}</h1>
     <v-form @submit="handleSubmit">
       <div class="form-group">
         <label for="name">Nome da Agenda</label>
@@ -150,18 +150,23 @@ export default {
     const state = reactive({
       agenda: new Agenda(null, '', null, '', '', '01:00', '', '', '', ''),
       checkedDays: [2, 3, 4, 5, 6],
+      title: 'Cadastrar Agenda',
     });
 
     const { userId } = getCurrentUserValue();
     getAgendaByUserId(userId).then((response) => {
-      const {
-        id, name, fromHour, toHour, serviceTime, lunchBreakFrom, lunchBreakTo, daysOfWeek, address,
-      } = response.data;
-      state.checkedDays = daysOfWeek.split(',').map((item: string) => parseInt(item, 10));
-      state.agenda = new Agenda(
-        id, name, null, fromHour, toHour,
-        serviceTime, lunchBreakFrom, lunchBreakTo, daysOfWeek, address,
-      );
+      if (response.data) {
+        const {
+          id, name, fromHour, toHour, serviceTime,
+          lunchBreakFrom, lunchBreakTo, daysOfWeek, address,
+        } = response.data;
+        state.checkedDays = daysOfWeek.split(',').map((item: string) => parseInt(item, 10));
+        state.agenda = new Agenda(
+          id, name, null, fromHour, toHour,
+          serviceTime, lunchBreakFrom, lunchBreakTo, daysOfWeek, address,
+        );
+        state.title = 'Atualizar Agenda';
+      }
     }).catch((error) => {
       console.error(error);
     });
